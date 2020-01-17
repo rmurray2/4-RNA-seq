@@ -19,7 +19,7 @@ require(DESeq2)
 
 ddsHTSeq <- DESeqDataSetFromHTSeqCount(sampleTable = sampleMetaData, 
                                         directory = "./star_count/",
-                                       design= ~ condition)
+                                       design= ~ pair+condition)
 ## design = ~ condition 
 ## will test for fold change between the two conditions (CTRL and SHH) without considering (i.e. correcting for) 'pair' information.
 
