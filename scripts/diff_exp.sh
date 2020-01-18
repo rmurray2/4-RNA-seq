@@ -1,10 +1,9 @@
 #!/bin/bash -l
 # author: murrayry
 #SBATCH -J DE_exp
-#SBATCH --constraint="snb|hsw"
 #SBATCH -o OUT/DE_exp_out_%j.txt
 #SBATCH -e ERROR/DE_exp_err_%j.txt
-#SBATCH -p serial
+#SBATCH -p large
 #SBATCH -n 1
 #SBATCH -t 0:30:00
 #SBATCH --mem=4000
