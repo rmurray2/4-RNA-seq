@@ -23,6 +23,7 @@ do
 if [  -f $my_file ]
 then
     #Check for blank lines in sortMeRna files. Star Aligner will not take any lines after a blank line as input. 
+    #https://www.biostars.org/p/302365/#315729
     grep -E --line-number --with-filename '^$' $my_file >> OUT/blank_lines_check
 	echo "gzip  $my_file " >> commands/$num_cmnds"_compress_"$1.txt
 fi
