@@ -40,6 +40,7 @@ ensembl_ms_mart <- useMart(biomart="ensembl", dataset=args[2] ,host = "http://us
 ## Which attributes of genes do we want to download
 # grep("GC",listAttributes(ensembl_ms_mart)$description,ignore.case = TRUE)
 # listAttributes(ensembl_ms_mart)[26,]
+# "uniprotswissprot",  "uniprotsptrembl"
 gene_attributes<- c("ensembl_gene_id",  "external_gene_name", "gene_biotype", "percentage_gene_gc_content")
 suppressMessages(
   gene_attribute_data <- getBM(attributes=gene_attributes,values= rownames(rlogMat), ensembl_ms_mart, filters = "ensembl_gene_id") )
