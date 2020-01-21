@@ -58,8 +58,8 @@ sbatch scripts/diff_exp.sh
 wait_for_job
 sleep 25s
 
-module load python-data/3.7.3-1
-python3 scripts/add_prior.py DE_genes.csv
+module load python-data
+python scripts/add_prior.py DE_genes.csv
 
 source scripts/multiqc_slurm.sh
 # This script will print some usage statistics to the
