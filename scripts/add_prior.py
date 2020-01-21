@@ -4,8 +4,8 @@ import sys
 
 input_f = pd.read_csv(sys.argv[1])
 
-ensg_to_prior_inparanoid = joblib.load('ensmusg_to_DE_prior_inparanoid')
-ensg_to_prior_biomart = joblib.load('ensmusg_to_DE_prior_Biomart')
+ensg_to_prior_inparanoid = joblib.load('./scripts/ensmusg_to_DE_prior_inparanoid')
+ensg_to_prior_biomart = joblib.load('./scripts/ensmusg_to_DE_prior_Biomart')
 
 l = []
 for i,j in input_f.iterrows():
