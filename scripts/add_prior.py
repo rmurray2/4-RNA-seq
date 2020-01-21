@@ -18,7 +18,7 @@ for i,j in input_f.iterrows():
 
 input_f['DE Prior'] = l
 
-input_f.to_csv('./DE_genes_copy.csv', index=False)
+input_f.to_csv(sys.argv[1].split('.')[0] + '_withPriors.csv', index=False)
 
 ###################################################
 
