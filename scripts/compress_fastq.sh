@@ -26,6 +26,7 @@ then
     num_blank=$(grep -E --line-number --with-filename "^$" $my_file | wc -l)
     if [ $num_blank -gt 0 ]
         then
+	#if blank lines exist, remove them and add to log file
         grep -E --line-number --with-filename '^$' $my_file >> ERROR/blank_lines_check.txt
 	sed -i '/^$/d' $my_file
         fi
@@ -36,3 +37,4 @@ sbatch_commandlist -t 12:00:00 -mem 4000 -jobname compress_array -threads 4 -com
 
 mv *_out_*txt OUT
 mv *_err_*txt ERROR
+
