@@ -48,7 +48,7 @@ suppressMessages(
 
 ##########################################################
 
-# Filtering out low expressed genes
+# Filtering out low expressed genes https://bioconductor.org/packages/devel/bioc/vignettes/DESeq2/inst/doc/DESeq2.html#pre-filtering
 dermis <- ddsHTSeq[ rowSums(counts(ddsHTSeq)) > 1, ]
 
 ##########################################################
