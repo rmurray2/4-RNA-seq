@@ -47,6 +47,9 @@ sleep 25s
 #python -c "import re; regex = re.compile('(\d{1,3}) bp'); res = regex.findall(open('./sortMeRna/sortMeRna.html', 'r').read()); m = max([int(i) for i in res]); print m"
 python -c "import re; regex = re.compile('(\d{1,3}) bp'); res = regex.findall(open('./sortMeRna/sortMeRna.html', 'r').read()); m = max([int(i) for i in res]); f = open('4-rna-seq.config', 'a'); f.write('maxReadLength=' + str(m)); f.close()"
 
+sbatch scripts/rsem_array_cmnd.sh sortMeRna rsem_counts
+wait_for_job
+
 sbatch scripts/star.sh sortMeRna star_alignment
 wait_for_job
 
