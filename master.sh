@@ -20,7 +20,7 @@ sed -i '/#SBATCH --mail-type=END/a #SBATCH --account=dasroy' $PWD/scripts/*.sh
 sed -i '/#SBATCH --mail-type=END/a #SBATCH --mail-user=ryan.z.murray@helsinki.fi' $PWD/scripts/*.sh
 
 num_files=$(ls $PWD/$1/*{fastq,fastq.gz,fq,fq.gz} | wc -l)
-sed -i "/#SBATCH --mail-type=END/a #SBATCH --array=1-$num_files" $PWD/slurm.sh
+sed -i "/#SBATCH --mail-type=END/a #SBATCH --array=1-$num_files" $PWD/scripts/rsem_array_cmnd.sh
 
 sbatch scripts/fastqc.sh $1
 wait_for_job
