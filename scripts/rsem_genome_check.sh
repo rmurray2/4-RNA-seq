@@ -20,7 +20,7 @@ if [ ! -d rsem_indx  ]; then
 	mkdir rsem_indx
 	overhang=$(( maxReadLength - 1 ))
 
-	echo "/users/murrayry/RSEM/software/RSEM-1.2.25/rsem-prepare-reference --gtf $gene_annotation --star --star-path /appl/soft/bio/star/gcc_9.1.0/2.7.2a/bin --num-threads 8 --star-sjdboverhang $overhang $genome_file rsem_indx/rsem_ref" >> commands/$num_cmnds"_rsem_prepare_reference".txt
+	echo "/users/murrayry/RSEM-1.3.1/rsem-prepare-reference --gtf $gene_annotation --star --star-path /appl/soft/bio/star/gcc_9.1.0/2.7.2a/bin --num-threads 8 --star-sjdboverhang $overhang $genome_file rsem_indx/rsem_ref" >> commands/$num_cmnds"_rsem_prepare_reference".txt
 
 	sbatch_commandlist -t 12:00:00 -mem 64000 -jobname rsem_prepare_reference -theads 8 -commands commands/$num_cmnds"_rsem_prepare_reference".txt
 
