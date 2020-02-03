@@ -2,8 +2,8 @@
 # created: Feb 2, 2020
 # author: rmurray
 #SBATCH -J rsem_calculate
-#SBATCH -o OUT/rsem_out_%j.txt
-#SBATCH -e ERROR/rsem_err_%j.txt
+#SBATCH -o OUT/rsem_prepare_genome_out_%j.txt
+#SBATCH -e ERROR/rsem_prepare_genome_err_%j.txt
 #SBATCH -p large 
 #SBATCH -n 1
 #SBATCH -t 12:00:00
