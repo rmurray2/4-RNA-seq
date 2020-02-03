@@ -9,8 +9,7 @@
 #SBATCH --mem=4000
 #SBATCH --mail-type=END
 
-module load rstudio/1.2.5019
-module load r-env
+module load r-env rstudio
 
 source scripts/command_utility.sh
 num_cmnds=$( cmnds_in_file )
