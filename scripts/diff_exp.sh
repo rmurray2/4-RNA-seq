@@ -32,7 +32,7 @@ if [ ! -d "$HOME/R_libs" ]
    rm $HOME/master.tar.gz
 fi
 
-echo "Rscript scripts/DE_exp_tximport.R sample_description_for_rsem.csv $biomart_dataset $adj_pval_cutoff $USER" >> commands/$num_cmnds"_DE_exp_rsem_commands.txt"
+echo "Rscript scripts/DE_exp_tximport.R sample_description_for_rsem.csv $biomart_dataset $USER" >> commands/$num_cmnds"_DE_exp_rsem_commands.txt"
 sbatch_commandlist -t 0:30:00 -mem 4000 -jobname DE_exp -threads 1 -commands commands/$num_cmnds"_DE_exp_rsem_commands.txt"
 
 mv *_out_*txt OUT
