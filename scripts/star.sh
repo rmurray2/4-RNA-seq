@@ -11,25 +11,39 @@
 
 source scripts/command_utility.sh
 
-module load gcc/9.1.0 star/2.7.2
+module load gcc star r-env rstudio perl
 
-## Starting Indexing the genome
-if [ ! -d star-genome_ann_Indices ]; then
+if [ ! -d rsem_indx  ]; then
 	
-	mkdir star-genome_ann_Indices
+	mkdir rsem_indx
 	overhang=$(( maxReadLength - 1 ))
 
-	echo "STAR --runMode genomeGenerate --genomeDir star-genome_ann_Indices \
-		--genomeFastaFiles $genome_file --sjdbGTFfile  $gene_annotation \
-		--runThreadN 6 --sjdbOverhang $overhang" >> commands/$num_cmnds"_star-genome_annotated".txt 
+	echo "/users/murrayry/RSEM-1.3.1/rsem-prepare-reference --gtf $gene_annotation --star --star-path /appl/soft/bio/star/gcc_9.1.0/2.7.2a/bin -p 8 --star-sjdboverhang $overhang $genome_file rsem_indx/rsem_ref" >> commands/$num_cmnds"_rsem_prepare_reference".txt
 
-	sbatch_commandlist -t 12:00:00 -mem 64000 -jobname star-indexing \
-	-threads 6  -commands commands/$num_cmnds"_star-genome_annotated".txt 
+	/users/murrayry/RSEM-1.3.1/rsem-prepare-reference --gtf $gene_annotation --star --star-path /appl/soft/bio/star/gcc_9.1.0/2.7.2a/bin -p 8 --star-sjdboverhang $overhang $genome_file rsem_indx/rsem_ref
 
 	mv *_out_*txt OUT
 	mv *_err_*txt ERROR
 
 fi
+#Indexing the genome this way doesn't work with RSEM
+## Starting Indexing the genome
+#if [ ! -d star-genome_ann_Indices ]; then
+#	
+#	mkdir star-genome_ann_Indices
+#	overhang=$(( maxReadLength - 1 ))
+#
+#	echo "STAR --runMode genomeGenerate --genomeDir star-genome_ann_Indices \
+#		--genomeFastaFiles $genome_file --sjdbGTFfile  $gene_annotation \
+#		--runThreadN 6 --sjdbOverhang $overhang" >> commands/$num_cmnds"_star-genome_annotated".txt 
+#
+#	sbatch_commandlist -t 12:00:00 -mem 64000 -jobname star-indexing \
+#	-threads 6  -commands commands/$num_cmnds"_star-genome_annotated".txt 
+#
+#	mv *_out_*txt OUT
+#	mv *_err_*txt ERROR
+#
+#fi
 ## Finished Indexing the genome 
 
 
@@ -54,7 +68,7 @@ do
 	fi 
 
 
-  	echo "STAR --genomeDir star-genome_ann_Indices --readFilesIn  $my_file $uncompress \
+  	echo "STAR --genomeDir rsem_indx --readFilesIn  $my_file $uncompress \
 		--outFileNamePrefix $2/star_annotated_$filename \
 		--outSAMtype BAM SortedByCoordinate --runThreadN 4" >> commands/$num_cmnds"_STAR_align_"$1_commands.txt
 fi
