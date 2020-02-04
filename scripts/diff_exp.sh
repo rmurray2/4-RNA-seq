@@ -15,10 +15,13 @@ source scripts/command_utility.sh
 num_cmnds=$( cmnds_in_file )
 
 #update sample description file  
-python scripts/update_sample_description.py $samp_desc
+python scripts/update_sample_description.py sample_description_for_htseq.csv
+
+#create sample description file for rsem counts
+python scripts/parse_samples.py --data rsem_counts --pairpattern $pairpattern --filename sample_description_for_rsem --rsem
 
 
-echo "Rscript scripts/DE_exp.R $samp_desc $biomart_dataset $adj_pval_cutoff" >> commands/$num_cmnds"_DE_exp_commands.txt"
+echo "Rscript scripts/DE_exp.R sample_description_for_htseq.csv $biomart_dataset $adj_pval_cutoff" >> commands/$num_cmnds"_DE_exp_commands.txt"
 sbatch_commandlist -t 0:30:00 -mem 4000 -jobname DE_exp -threads 1 -commands commands/$num_cmnds"_DE_exp_commands.txt"
 
 if [ ! -d "$HOME/R_libs" ]
@@ -29,7 +32,7 @@ if [ ! -d "$HOME/R_libs" ]
    rm $HOME/master.tar.gz
 fi
 
-echo "Rscript scripts/DE_exp_tximport.R $samp_desc_rsem $biomart_dataset $adj_pval_cutoff $USER" >> commands/$num_cmnds"_DE_exp_rsem_commands.txt"
+echo "Rscript scripts/DE_exp_tximport.R sample_description_for_rsem.csv $biomart_dataset $adj_pval_cutoff $USER" >> commands/$num_cmnds"_DE_exp_rsem_commands.txt"
 sbatch_commandlist -t 0:30:00 -mem 4000 -jobname DE_exp -threads 1 -commands commands/$num_cmnds"_DE_exp_rsem_commands.txt"
 
 mv *_out_*txt OUT
