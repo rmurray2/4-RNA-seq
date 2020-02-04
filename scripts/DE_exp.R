@@ -66,7 +66,7 @@ p <- ggplot(pcaData, aes(PC1, PC2,  text=name,group=pair)) +
             ylab(paste0("PC2: ",percentVar[2],"% variance")) +
             coord_fixed() + ggtitle(" ")
 
-png(filename="pcaplot.png")
+png(filename="pcaplot_htseq.png")
 plot(p)
 dev.off()
 
