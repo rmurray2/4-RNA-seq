@@ -11,10 +11,15 @@
 #SBATCH --mail-type=END
 #SBATCH --account=dasroy
 
+source scripts/command_utility.sh                                                                                                                                                                                                             
+module load python-data
+
 wait_for_job () {
 	#while the number of lines in the squeue is > 2, WAIT
 	while (( "$(squeue -u $USER | wc -l)" > 2 )); do :; done 
 }
+
+python scripts/parse_samples.py --data $data_dir --pairpattern $pairpattern --filename sample_description_for_htseq
 
 sed -i '/#SBATCH --mail-type=END/a #SBATCH --account=dasroy' $PWD/scripts/*.sh
 sed -i '/#SBATCH --mail-type=END/a #SBATCH --mail-user=ryan.z.murray@helsinki.fi' $PWD/scripts/*.sh
@@ -52,10 +57,6 @@ wait_for_job
 
 sbatch scripts/rsem_array_cmnd.sh sortMeRna rsem_counts
 wait_for_job
-
-######
-#run parse_samples.py using rsem option
-######
 
 sbatch scripts/star.sh sortMeRna star_alignment
 wait_for_job
