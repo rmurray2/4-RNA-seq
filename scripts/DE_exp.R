@@ -77,10 +77,10 @@ write.csv(pcaData, "PCA_data.csv")
 data_DESeq <- DESeq(dermis)
 ## Building the result table
   
-res <- results(data_DESeq, alpha=p_adjusted, contrast=c("condition", "Exp", "Ctrl"))
+res <- results(data_DESeq, contrast=c("condition", "Exp", "Ctrl"))
 
-resSig <- subset(res, padj < p_adjusted)
-resSig <- as.data.frame(resSig)
+#resSig <- subset(res, padj < p_adjusted)
+resSig <- as.data.frame(res)
 
 ## Annotated the genes with previously downloaded data
 resSig$ensembl_gene_id <- rownames(resSig)
