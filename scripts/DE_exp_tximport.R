@@ -3,9 +3,7 @@ args<-commandArgs(TRUE)
 #args[2] is whether human or mouse, hsapiens_gene_ensembl or mmusculus_gene_ensembl
 #args[3] is adjusted pvalue cutoff
 
-p_adjusted = as.numeric(args[3])
-
-user_path =paste0('/users/', args[4], '/R_libs')
+user_path =paste0('/users/', args[3], '/R_libs')
 library(tximport, lib.loc=user_path)
 
 setwd("./")
