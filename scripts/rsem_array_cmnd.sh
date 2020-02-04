@@ -1,7 +1,7 @@
 #!/bin/bash -l
 # created: Feb 2, 2020
 #author rmurray
-#SBATCH -J rsem_array_job
+#SBATCH -J rsem_calculate_expression
 #SBATCH -o OUT/rsem_calculate_expression_out_%j.txt
 #SBATCH -e ERROR/rsem_calculate_expression_err_%j.txt
 #SBATCH --partition=large
@@ -22,7 +22,7 @@ ls -t $1/*.fq.gz| xargs -n 1 basename > justnamelist
 
 name=$(sed -n ${SLURM_ARRAY_TASK_ID}p namelist)
 justname=$(sed -n ${SLURM_ARRAY_TASK_ID}p justnamelist)
-
+echo "/users/murrayry/RSEM-1.3.1/rsem-calculate-expression -p 8 --strandedness forward --star --star-path /appl/soft/bio/star/gcc_9.1.0/2.7.2a/bin --star-gzipped-read-file $name rsem_indx/rsem_ref $2/$justname" >> commands/$num_cmnds"_rsem_calculate_expression".txt
 /users/murrayry/RSEM-1.3.1/rsem-calculate-expression -p 8 --strandedness forward --star --star-path /appl/soft/bio/star/gcc_9.1.0/2.7.2a/bin --star-gzipped-read-file ${name} rsem_indx/rsem_ref $2/${justname}
 
 
