@@ -1,13 +1,13 @@
 #!/bin/bash -l
 # created: Feb 2, 2020
 # author: rmurray
-#SBATCH -J rsem_calculate
+#SBATCH -J rsem_prepare_reference
 #SBATCH -o OUT/rsem_prepare_genome_out_%j.txt
 #SBATCH -e ERROR/rsem_prepare_genome_err_%j.txt
 #SBATCH -p large 
-#SBATCH -n 1
+#SBATCH -n 8
 #SBATCH -t 12:00:00
-#SBATCH --mem-per-cpu=8000
+#SBATCH --mem-per-cpu=48000
 #SBATCH --mail-type=END
 
 source scripts/command_utility.sh
