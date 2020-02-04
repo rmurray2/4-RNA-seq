@@ -47,6 +47,9 @@ sleep 25s
 #python -c "import re; regex = re.compile('(\d{1,3}) bp'); res = regex.findall(open('./sortMeRna/sortMeRna.html', 'r').read()); m = max([int(i) for i in res]); print m"
 python -c "import re; regex = re.compile('(\d{1,3}) bp'); res = regex.findall(open('./sortMeRna/sortMeRna.html', 'r').read()); m = max([int(i) for i in res]); f = open('4-rna-seq.config', 'a'); f.write('maxReadLength=' + str(m)); f.close()"
 
+######
+#run parse_samples.py using rsem option
+
 sbatch scripts/rsem_genome_check.sh
 wait_for_job
 
