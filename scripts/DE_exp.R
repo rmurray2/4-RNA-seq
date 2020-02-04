@@ -70,7 +70,7 @@ png(filename="pcaplot_htseq.png")
 plot(p)
 dev.off()
 
-write.csv(pcaData, "PCA_data.csv")
+write.csv(pcaData, "PCA_data_htseq.csv")
 #############################################################
 
 ## Running DESeq
