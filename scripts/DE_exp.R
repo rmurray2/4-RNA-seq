@@ -86,7 +86,7 @@ resSig <- as.data.frame(res)
 resSig$ensembl_gene_id <- rownames(resSig)
 resSig_dermis_annotated <- merge(resSig,gene_attribute_data,by="ensembl_gene_id")
 
-write.csv(resSig_dermis_annotated, "DE_genes.csv")
+write.csv(resSig_dermis_annotated, "DE_genes_htseq.csv")
 #resSig_dermis_annotated[,c(-1,-8,-9)] <-round(resSig_dermis_annotated[,c(-1,-8,-9)],4)
 # DT::datatable(resSig_dermis_annotated[,c(1:3,6:9)],rownames = FALSE)
 #resSig_dermis_annotated[,c(1:3,6:9)]
