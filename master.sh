@@ -73,6 +73,7 @@ sleep 25s
 
 module load python-data
 python scripts/add_prior.py DE_genes.csv
+python scripts/add_prior.py DE_genes_tpm.csv
 
 source scripts/multiqc_slurm.sh
 # This script will print some usage statistics to the
