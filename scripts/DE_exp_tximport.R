@@ -23,7 +23,6 @@ library(tximport)
 samples <- read.csv(args[1],header = TRUE)
 rownames(samples) <- samples$sampleName
 
-#change DIR TODO
 files <- paste0("", samples$fileName)
 names(files) <- samples$sampleName
 txi.rsem <- tximport(files, type = "rsem", txIn = FALSE, txOut = FALSE)
