@@ -16,6 +16,10 @@ parser = argparse.ArgumentParser(description='Description of your program')
 parser.add_argument('-d','--data', help='Directory containing processed sequences', required=True)
 parser.add_argument('-p','--pairpattern', help='Regular expression pattern in file names to match paired samples. Use "_" for variable containing pair information', required=False)
 parser.add_argument('-e','--exclusiontext', help='Exclude files containing text (comma-separated, no spaces).', required=False)
+parser.add_argument('-n','--filename', help='Output CSV filename prefix', required=True)
+parser.add_argument('--rsem', dest='rsem', action='store_true', help='Look for RSEM output files', required=False, default=False)
+
+
 args = vars(parser.parse_args())
 
 fastqdir = args['data']
@@ -24,7 +28,12 @@ if args['pairpattern'] != None:
     pairre = re.compile(args['pairpattern'].replace('_', '(\S{1})'))
 
 all_files = os.listdir(fastqdir)
-all_files = [i for i in all_files if ('fastq.gz' == i[-8:] or 'fq.gz' == i[-5:])]
+if args['rsem'] == False:
+    all_files = [i for i in all_files if ('fastq.gz' == i[-8:] or 'fq.gz' == i[-5:]) ]
+else: #we're processing rsem gene counts files
+    all_files = [fastqdir + '/' + i for i in all_files if ('genes' in i)]
+
+    
 files = []
 
 exclusion_text = args['exclusiontext']
@@ -57,20 +66,30 @@ col_names = ['sampleName', 'fileName', 'pair', 'condition']
 data = []
 
 for f in ctrl_files:
-    td = {'sampleName':f.split('.')[0],
+    if '/' in f:
+        sampname = f.split('/')[1].split('.')[0]
+    else:
+        sampname = f.split(',')[0]
+    
+    td = {'sampleName':sampname,
           'fileName':f,
           'pair':paird[f],
           'condition':'Ctrl'}
     data.append(td)
 
 for f in exp_files:
-    td = {'sampleName':f.split('.')[0],
+    if '/' in f:
+        sampname = f.split('/')[1].split('.')[0]
+    else:
+        sampname = f.split(',')[0]
+
+    td = {'sampleName':sampname,
           'fileName':f,
           'pair':paird[f],
           'condition':'Exp'}
     data.append(td)
 
-csv_file = 'sample_description.csv'
+csv_file =args['filename'] + '.csv'
 
 try:
     with open(csv_file, 'w') as csvfile:
