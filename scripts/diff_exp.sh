@@ -9,7 +9,7 @@
 #SBATCH --mem=4000
 #SBATCH --mail-type=END
 
-module load r-env rstudio
+module load r-env rstudio python-data
 
 source scripts/command_utility.sh
 num_cmnds=$( cmnds_in_file )
