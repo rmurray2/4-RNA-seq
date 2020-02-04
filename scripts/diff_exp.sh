@@ -21,7 +21,7 @@ python scripts/update_sample_description.py sample_description_for_htseq.csv
 python scripts/parse_samples.py --data rsem_counts --pairpattern $pairpattern --filename sample_description_for_rsem --rsem
 
 
-echo "Rscript scripts/DE_exp.R sample_description_for_htseq.csv $biomart_dataset $adj_pval_cutoff" >> commands/$num_cmnds"_DE_exp_commands.txt"
+echo "Rscript scripts/DE_exp.R sample_description_for_htseq.csv $biomart_dataset" >> commands/$num_cmnds"_DE_exp_commands.txt"
 sbatch_commandlist -t 0:30:00 -mem 4000 -jobname DE_exp -threads 1 -commands commands/$num_cmnds"_DE_exp_commands.txt"
 
 if [ ! -d "$HOME/R_libs" ]
