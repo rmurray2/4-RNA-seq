@@ -11,7 +11,6 @@
 #SBATCH --mail-type=END
 #SBATCH --account=dasroy
 
-export PROJAPPL=/projappl/$project_id
 
 source scripts/command_utility.sh                                                                                                                                                                                                             
 module load python-data
