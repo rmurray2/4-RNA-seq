@@ -82,11 +82,11 @@ p <- ggplot(pcaData, aes(PC1, PC2,  text=name,group=pair)) +
             ylab(paste0("PC2: ",percentVar[2],"% variance")) +
             coord_fixed() + ggtitle(" ")
 
-png(filename="pcaplot_htseq.png")
+png(filename="pcaplot_tpm.png")
 plot(p)
 dev.off()
 
-write.csv(pcaData, "PCA_data_htseq.csv")
+write.csv(pcaData, "PCA_data_tpm.csv")
 #############################################################
 
 ## Running DESeq
