@@ -72,11 +72,12 @@ sbatch scripts/diff_exp.sh
 wait_for_job
 sleep 25s
 
+source scripts/multiqc_slurm.sh
+
 module load python-data
 python scripts/add_prior.py DE_genes_htseq.csv
 python scripts/add_prior.py DE_genes_tpm.csv
 
-source scripts/multiqc_slurm.sh
 # This script will print some usage statistics to the
 # end of file: fastqc_out
 # Use that to improve your resource request estimate
