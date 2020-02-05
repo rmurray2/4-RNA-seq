@@ -73,7 +73,7 @@ wait_for_job
 sleep 25s
 
 module load python-data
-python scripts/add_prior.py DE_genes.csv
+python scripts/add_prior.py DE_genes_htseq.csv
 python scripts/add_prior.py DE_genes_tpm.csv
 
 source scripts/multiqc_slurm.sh
