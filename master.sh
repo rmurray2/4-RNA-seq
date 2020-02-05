@@ -13,7 +13,6 @@
 
 
 source scripts/command_utility.sh                                                                                                                                                                                                             
-module load python-data
 
 wait_for_job () {
 	#while the number of lines in the squeue is > 2, WAIT
