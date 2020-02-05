@@ -10,6 +10,7 @@
 #SBATCH --mem-per-cpu=48000
 #SBATCH --mail-type=END
 
+source scripts/command_utility.sh
 module load gcc star r-env rstudio perl 
 
 if [ ! -d "$2" ]
