@@ -24,7 +24,7 @@ rownames(samples) <- samples$sampleName
 files <- paste0("", samples$fileName)
 names(files) <- samples$sampleName
 txi.rsem <- tximport(files, type = "rsem", txIn = FALSE, txOut = FALSE)
-write.csv(txi.rsem, "txi.rsem.csv")
+write.csv(txi.rsem, "rsem_tpm_counts.csv")
 
 #change genes with effective length zero to one
 txi.rsem$length[txi.rsem$length == 0] <- 1
