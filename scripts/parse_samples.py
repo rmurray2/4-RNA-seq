@@ -31,7 +31,7 @@ all_files = os.listdir(fastqdir)
 if args['rsem'] == False:
     all_files = [i for i in all_files if ('fastq.gz' == i[-8:] or 'fq.gz' == i[-5:]) ]
 else: #we're processing rsem gene counts files
-    all_files = [fastqdir + '/' + i for i in all_files if ('genes' in i)]
+    all_files = [fastqdir + '/' + i for i in all_files if (('genes' in i) and (i != '.genes.results'))]
 
     
 files = []
