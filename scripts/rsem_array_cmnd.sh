@@ -13,11 +13,6 @@
 source scripts/command_utility.sh
 module load gcc star r-env rstudio perl 
 
-if [ ! -d "$2" ]
-   then
-   mkdir $2
-fi
-
 ls -t $1/*.fq.gz > namelist
 ls -t $1/*.fq.gz| xargs -n 1 basename > justnamelist
 
