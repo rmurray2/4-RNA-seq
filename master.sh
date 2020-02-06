@@ -11,8 +11,7 @@
 #SBATCH --mail-type=END
 #SBATCH --account=dasroy
 
-
-source scripts/command_utility.sh                                                                                                                                                                                                             
+source scripts/command_utility.sh 
 
 wait_for_job () {
 	#while the number of lines in the squeue is > 2, WAIT
@@ -60,7 +59,6 @@ if [ ! -d rsem_counts ]
    mkdir rsem_counts
 fi
 
-
 sbatch scripts/rsem_array_cmnd.sh sortMeRna rsem_counts
 wait_for_job
 
@@ -81,8 +79,13 @@ sleep 25s
 source scripts/multiqc_slurm.sh
 
 module load python-data
+
+#add Prior probabilities of DE
 python scripts/add_prior.py DE_genes_htseq.csv
 python scripts/add_prior.py DE_genes_tpm.csv
+
+#add mean and difference between TPM values
+python scripts/add_column.py
 
 # This script will print some usage statistics to the
 # end of file: fastqc_out
