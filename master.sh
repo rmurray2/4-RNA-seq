@@ -55,6 +55,12 @@ python -c "import re; regex = re.compile('(\d{1,3}) bp'); res = regex.findall(op
 sbatch scripts/rsem_genome_check.sh
 wait_for_job
 
+if [ ! -d rsem_counts ]
+   then
+   mkdir rsem_counts
+fi
+
+
 sbatch scripts/rsem_array_cmnd.sh sortMeRna rsem_counts
 wait_for_job
 
