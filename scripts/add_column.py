@@ -53,8 +53,8 @@ for ensg, coldata in rmse_de_df.iterrows():
     mean_ctrl_col.append(i[1])
     diff.append(i[2])
 
-rmse_de_df['Mean_exp'] = mean_exp_col
-rmse_de_df['Mean_ctrl'] = mean_ctrl_col
+rmse_de_df['Mean_tpm_exp'] = mean_exp_col
+rmse_de_df['Mean_tpm_ctrl'] = mean_ctrl_col
 rmse_de_df['tpm_diff'] = diff
 
 
