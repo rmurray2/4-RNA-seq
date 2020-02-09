@@ -13,10 +13,6 @@
 source scripts/command_utility.sh
 module load gcc star r-env rstudio perl 
 
-ls -t $1/*.fq.gz > namelist
-ls -t $1/*.fq.gz| xargs -n 1 basename > justnamelist
-sleep 10s
-
 name=$(sed -n ${SLURM_ARRAY_TASK_ID}p namelist)
 justname=$(sed -n ${SLURM_ARRAY_TASK_ID}p justnamelist)
 echo "/users/murrayry/RSEM-1.3.1/rsem-calculate-expression -p 8 --strandedness forward --star --star-path /appl/soft/bio/star/gcc_9.1.0/2.7.2a/bin --star-gzipped-read-file $name rsem_indx/rsem_ref $2/$justname" >> commands/$num_cmnds"_rsem_calculate_expression".txt
