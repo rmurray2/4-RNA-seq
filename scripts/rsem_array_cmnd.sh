@@ -15,6 +15,7 @@ module load gcc star r-env rstudio perl
 
 ls -t $1/*.fq.gz > namelist
 ls -t $1/*.fq.gz| xargs -n 1 basename > justnamelist
+sleep 10s
 
 name=$(sed -n ${SLURM_ARRAY_TASK_ID}p namelist)
 justname=$(sed -n ${SLURM_ARRAY_TASK_ID}p justnamelist)
