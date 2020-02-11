@@ -13,7 +13,7 @@
 source scripts/command_utility.sh
 num_cmnds=$( cmnds_in_file )
 
-module load gcc star r-env rstudio perl gcc boost mpich rsem/1.3.2
+module load gcc star r-env rstudio perl gcc biokit boost mpich rsem/1.3.2
 
 if [ ! -d rsem_indx  ]; then
 	
