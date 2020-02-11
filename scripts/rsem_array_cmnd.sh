@@ -11,7 +11,8 @@
 #SBATCH --mail-type=END
 
 source scripts/command_utility.sh
-module load gcc star r-env rstudio perl gcc boost mpich rsem/1.3.2
+module load gcc star r-env rstudio perl gcc biokit boost mpich rsem/1.3.2
+
 
 if [ ! -d "$2" ]
  then
