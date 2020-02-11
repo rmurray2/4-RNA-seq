@@ -23,8 +23,8 @@ python scripts/parse_samples.py --data $data_dir --pairpattern $pairpattern --fi
 sed -i '/#SBATCH --mail-type=END/a #SBATCH --account=dasroy' $PWD/scripts/*.sh
 sed -i '/#SBATCH --mail-type=END/a #SBATCH --mail-user=ryan.z.murray@helsinki.fi' $PWD/scripts/*.sh
 
-num_files=$(ls $PWD/$data_dir/*{fastq,fastq.gz,fq,fq.gz} | wc -l)
-sed -i "/#SBATCH --mail-type=END/a #SBATCH --array=1-$num_files" $PWD/scripts/rsem_array_cmnd.sh
+#num_files=$(ls $PWD/$data_dir/*{fastq,fastq.gz,fq,fq.gz} | wc -l)
+#sed -i "/#SBATCH --mail-type=END/a #SBATCH --array=1-$num_files" $PWD/scripts/rsem_array_cmnd.sh
 
 sbatch scripts/fastqc.sh $data_dir
 wait_for_job
@@ -56,13 +56,6 @@ wait_for_job
 
 ####################################
 #RSEM calculate expression
-if [ ! -d rsem_counts ]
-   then
-   mkdir rsem_counts
-fi
-
-ls -t sortMeRna/*.fq.gz > namelist
-ls -t sortMeRna/*.fq.gz| xargs -n 1 basename > justnamelist
 
 sbatch scripts/rsem_array_cmnd.sh sortMeRna rsem_counts
 wait_for_job
