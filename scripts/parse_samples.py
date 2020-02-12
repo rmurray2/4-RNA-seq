@@ -18,6 +18,7 @@ parser.add_argument('-p','--pairpattern', help='Regular expression pattern in fi
 parser.add_argument('-e','--exclusiontext', help='Exclude files containing text (comma-separated, no spaces).', required=False)
 parser.add_argument('-n','--filename', help='Output CSV filename prefix', required=True)
 parser.add_argument('--rsem', dest='rsem', action='store_true', help='Look for RSEM output files', required=False, default=False)
+parser.add_argument('--switch', dest='switch', action='store_true', help='Prepare sample description file for IsoformSwitchAnalyzeR', required=False, default=False)
 
 
 args = vars(parser.parse_args())
@@ -28,12 +29,13 @@ if args['pairpattern'] != None:
     pairre = re.compile(args['pairpattern'].replace('_', '(\S{1})'))
 
 all_files = os.listdir(fastqdir)
-if args['rsem'] == False:
-    all_files = [i for i in all_files if ('fastq.gz' == i[-8:] or 'fq.gz' == i[-5:]) ]
-else: #we're processing rsem gene counts files
+if args['rsem'] == True:
     all_files = [fastqdir + '/' + i for i in all_files if (('genes' in i) and (i != '.genes.results'))]
+elif args['switch'] == True:
+    all_files = [fastqdir + '/' + i for i in all_files if (('isoform' in i))]
+else:
+    all_files = [i for i in all_files if ('fastq.gz' == i[-8:] or 'fq.gz' == i[-5:]) ]
 
-    
 files = []
 
 exclusion_text = args['exclusiontext']
@@ -66,10 +68,14 @@ col_names = ['sampleName', 'fileName', 'pair', 'condition']
 data = []
 
 for f in ctrl_files:
-    if '/' in f:
-        sampname = f.split('/')[1].split('.')[0]
-    else:
-        sampname = f.split(',')[0]
+    if args['switch'] == True:
+        nodir = f.split('/')[1]
+        sampname = '.'.join(nodir.split('.')[:-2])
+    else: 
+        if '/' in f:
+            sampname = f.split('/')[1].split('.')[0]
+        else:
+            sampname = f.split(',')[0]
     
     td = {'sampleName':sampname,
           'fileName':f,
@@ -78,10 +84,14 @@ for f in ctrl_files:
     data.append(td)
 
 for f in exp_files:
-    if '/' in f:
-        sampname = f.split('/')[1].split('.')[0]
-    else:
-        sampname = f.split(',')[0]
+    if args['switch'] == True:
+        nodir = f.split('/')[1]
+        sampname = '.'.join(nodir.split('.')[:-2])
+    else: 
+        if '/' in f:
+            sampname = f.split('/')[1].split('.')[0]
+        else:
+            sampname = f.split(',')[0]
 
     td = {'sampleName':sampname,
           'fileName':f,
