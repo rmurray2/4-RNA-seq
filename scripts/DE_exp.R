@@ -5,6 +5,7 @@ args<-commandArgs(TRUE)
 
 setwd("./")
 sampleMetaData <- read.csv(args[1],header = TRUE)
+sampleMetaData$pair <- as.factor(sampleMetaData$pair)
 
 if (!requireNamespace("BiocManager", quietly = TRUE)) {
     install.packages("BiocManager")
