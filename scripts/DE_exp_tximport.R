@@ -19,6 +19,7 @@ require(DESeq2)
 library(tximport)
 
 samples <- read.csv(args[1],header = TRUE)
+
 rownames(samples) <- samples$sampleName
 
 files <- paste0("", samples$fileName)
