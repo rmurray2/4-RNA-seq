@@ -1,0 +1,8 @@
+*fq.gz
+*fastq.gz
+*.bam
+./rsem_indx
+./bad
+*thread*
+*.sam
+*.fasta
