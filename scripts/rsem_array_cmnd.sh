@@ -29,7 +29,7 @@ then
 fi
 done  
 
-sbatch_commandlist -t 12:00:00 -mem 24000 -jobname rsem_expression_array -threads 8  -commands commands/$num_cmnds"_RSEM_calculate_expression"$1_commands.txt
+sbatch_commandlist -t 12:00:00 -mem 48000 -jobname rsem_expression_array -threads 8  -commands commands/$num_cmnds"_RSEM_calculate_expression"$1_commands.txt
 
 #name=$(sed -n ${SLURM_ARRAY_TASK_ID}p namelist)
 #justname=$(sed -n ${SLURM_ARRAY_TASK_ID}p justnamelist)
