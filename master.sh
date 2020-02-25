@@ -86,7 +86,6 @@ python scripts/add_prior.py DE_genes_tpm.csv
 #add mean and difference between TPM values
 python scripts/add_column.py
 
-tar -zcvf $project_name".tar.gz" -X exclude ./
 
 # This script will print some usage statistics to the
 # end of file: fastqc_out
