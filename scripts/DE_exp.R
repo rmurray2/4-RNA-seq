@@ -38,7 +38,7 @@ require(biomaRt)
 # ensDataSet <- listDatasets(ensMart)
 # mouse_id <- grep("mouse",ensDataSet$description,ignore.case = TRUE)
 # ensDataSet[mouse_id,]
-ensembl_ms_mart <- useMart(biomart="ensembl", dataset=args[2] ,host = "http://uswest.ensembl.org")
+ensembl_ms_mart <- useMart(biomart="ensembl", dataset=args[2] ,host = "http://useast.ensembl.org")
 ## Which attributes of genes do we want to download
 # grep("GC",listAttributes(ensembl_ms_mart)$description,ignore.case = TRUE)
 # listAttributes(ensembl_ms_mart)[26,]
