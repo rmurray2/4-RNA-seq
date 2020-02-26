@@ -23,9 +23,7 @@ ddsHTSeq <- DESeqDataSetFromHTSeqCount(sampleTable = sampleMetaData,
 ## will test for fold change between the two conditions (CTRL and SHH) without considering (i.e. correcting for) 'pair' information.
 
 rlogMat<-as.data.frame(assay(rlog(ddsHTSeq)))
-library(stringr)
-no_versions = str_replace(rownames(rlogMat), pattern = ".[0-9]+$",replacement = "")
-rownames(rlogMat) = no_versions
+
 
 #######################################################
 if (!requireNamespace("biomaRt", quietly = TRUE)) {
@@ -80,8 +78,6 @@ data_DESeq <- DESeq(dermis)
 ## Building the result table
   
 res <- results(data_DESeq, contrast=c("condition", "Exp", "Ctrl"))
-no_versions = str_replace(rownames(res), pattern = ".[0-9]+$",replacement = "")
-rownames(res) = no_versions
 
 #resSig <- subset(res, padj < p_adjusted)
 resSig <- as.data.frame(res)
