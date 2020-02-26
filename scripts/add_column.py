@@ -5,11 +5,11 @@ sample_desc_df = pd.read_csv('./sample_description_for_rsem.csv')
 
 cols = [i for i in tpm_df.columns if 'abundance' in i]
 
-d = {ensg.split('.')[0]:{} for ensg, coldata in tpm_df.iterrows()}
+d = {ensg:{} for ensg, coldata in tpm_df.iterrows()}
 
 for ensg, coldata in tpm_df.iterrows():
     for col in cols:
-        d[ensg.split('.')[0]][col] = coldata[col]
+        d[ensg][col] = coldata[col]
 
 #dict to relate tpm col names with sample_Desc sampleName field
 #dict to relate sample_desc sam[pleName with condition
